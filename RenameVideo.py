@@ -84,14 +84,16 @@ def main():
             "\t - Add potential names to \"ListOfNames.csv\" for better name-recognition,\n" + 
             "\t   \"ListOfNames.csv\" is found in the same directory as the program")
     
-    closeProgram()
+    closeProgram(True)
 
 def readCSV(csvNames):
+    RED = '\033[91m'
+    ENDC = '\033[0m'
     try:
         possibleNames = unpackCSVNames(csvNames)
     except OSError:
-        print("\nCould not open \"ListOfNames.csv\", make sure the file exists in the same folder as the program.", file=sys.stderr)
-        closeProgram()
+        print(RED + "\nCould not open \"ListOfNames.csv\", make sure the file exists in the same directory as the program." + ENDC)
+        closeProgram(False)
         exit()
     return possibleNames
 
@@ -330,8 +332,10 @@ def isInList(item, list):
     
     return isInList
 
-def closeProgram():
-    print("\nPress a key to exit")
+def closeProgram(success):
+    if(success):
+        print("\nProgram completed as expected!")
+    print("\n - Press any key to exit -")
     msvcrt.getch()
 
 if __name__ == "__main__":
