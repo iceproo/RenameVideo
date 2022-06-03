@@ -11,12 +11,15 @@ Bug fixes - Handles when program is run in different folder
 ----------------------------
 """
 # Handle file dialog
+from cgi import print_exception
+import msvcrt
 from ntpath import join, basename
 import shutil
 from tkinter import Tk
 from tkinter import filedialog
 from tkinter.filedialog import askopenfilenames
 from shutil import copy
+from typing import IO
 # To save audio
 from moviepy.video.io.VideoFileClip import VideoFileClip
 # Create new folder
@@ -29,15 +32,15 @@ import csv
 
 def main():
     csvNames = getCsvPath()
-    possibleNames = unpackCSVNames(csvNames)
+    possibleNames = readCSV(csvNames)
     possibleNamesWashed = washListNames(possibleNames)
     # Choose video files
-    print("Choose what videos you want to categorize!")
+    print("Choose what videos you want to categorize!\n")
     Tk().withdraw()
     filename = askopenfilenames()
 
     # Choose folder to store video files
-    print("Choose directory where to put categorized videos")
+    print("Choose directory where to put categorized videos!\n")
     
     goalDirectory = filedialog.askdirectory()
     # Creates new directories to program
@@ -70,15 +73,28 @@ def main():
         videoTag, suffix = orgName.split('.')
         newName = join(currentGoalDirectory, videoTag + rightName + "." + suffix)
         print(speechOutput)
-        print("Choosen name: " + rightName)
+        print("Choosen name: " + rightName + "\n")
         copy(v, newName)
     # Removes temporary audio folder    
     shutil.rmtree(tmpWavStorage)
 
     # Tell user that CSV-file can be edited
-    print("\nFör att ändra möjliga namn som filer kan namnges till så kan CSV-fil" +
-            " ändras. \nDen finns i samma mapp som programmet och det är viktigt att" +
-            " dess namn fortsätter att vara ListOfNames.csv\n")
+    print("\nA tip for best functionality:\n" + 
+            "\t - Wait at least one second before saying name to camera while recording.\n" + 
+            "\t - Add potential names to \"ListOfNames.csv\" for better name-recognition,\n" + 
+            "\t   \"ListOfNames.csv\" is found in the same directory as the program")
+    
+    closeProgram()
+
+def readCSV(csvNames):
+    try:
+        possibleNames = unpackCSVNames(csvNames)
+    except OSError:
+        print("\nCould not open \"ListOfNames.csv\", make sure the file exists in the same folder as the program.", file=sys.stderr)
+        closeProgram()
+        exit()
+    return possibleNames
+
 
 
 
@@ -313,6 +329,10 @@ def isInList(item, list):
             isInList = True
     
     return isInList
+
+def closeProgram():
+    print("\nPress a key to exit")
+    msvcrt.getch()
 
 if __name__ == "__main__":
     main()
