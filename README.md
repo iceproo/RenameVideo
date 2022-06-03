@@ -6,5 +6,5 @@ Requirements:
  - The python program should be stored in the same folder as "ListOfNames.csv".
  
 For best functionality: 
- - wait at least one second before saying name to camera. 
+ - wait at least one second before saying name to camera while recording. 
  - Add potential names to "ListOfNames.csv" for better name-recognition
