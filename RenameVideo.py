@@ -46,7 +46,7 @@ def main():
     directoryUndefined = createDirectory(goalDirectory, foldernameUncatigorized)
     directoryGuess = createDirectory(goalDirectory, "Guessing")
     
-    # Loop though every viedo that is choosen
+    # Loop through every video that is choosen
     for v in filename:
         orgName = basename(v)
         filenamePathWavtmp = extractAudio(v, tmpWavStorage, orgName)
