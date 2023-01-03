@@ -9,6 +9,7 @@ Text that tells user that CSV-file can be edited is moved to bottom
 Vers 8, 
 Bug fixes - Handles when program is run in different folder
 ----------------------------
+/TODO must fix program crash when picture
 """
 # Handle file dialog
 from cgi import print_exception
