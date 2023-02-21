@@ -1,5 +1,5 @@
 # RenameVideo
-Rename videos based on whats being said the first 10 seconds in a video clip. 
+Rename videos based on whats being said the first 10 seconds in a video clip, for example if a name has been said. 
 Creates a copy of the choosen videos and saves them to a specified directory.
 
 Requirements:
