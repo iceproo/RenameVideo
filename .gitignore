@@ -1,2 +1,8 @@
 RenameVideoEXE
 __pycache__
+RenameVideo.exe
+RenameVideo.spec
+build/
+dist/
+select_videos.py
+venv_rename_video_phone/

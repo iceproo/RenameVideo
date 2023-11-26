@@ -8,12 +8,14 @@ Version 7,
 Text that tells user that CSV-file can be edited is moved to bottom
 Vers 8, 
 Bug fixes - Handles when program is run in different folder
+Vers 9,
+Rewrite to make it work with android, kivy--> https://realpython.com/mobile-app-kivy-python/
 ----------------------------
 /TODO must fix program crash when picture
 """
 # Handle file dialog
-from cgi import print_exception
-import msvcrt
+#from cgi import print_exception
+#import msvcrt
 from ntpath import join, basename
 import shutil
 from tkinter import Tk
